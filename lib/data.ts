@@ -2,7 +2,7 @@ export const stats = [
   { value: '3.9K', label: 'Comunidad Instagram' },
   { value: '65', label: 'Publicaciones' },
   { value: '9', label: 'Años en la industria' },
-  { value: '7+', label: 'Marcas gestionadas' },
+  { value: '6', label: 'Marcas gestionadas' },
 ]
 
 export type Plan = {
@@ -68,16 +68,18 @@ export type Client = {
   name: string
   instagram: string
   logo?: string
+  /** `cover`: recorta en círculo (p. ej. logo horizontal con fondo rectangular). Resto: `contain`. */
+  logoFit?: 'contain' | 'cover'
 }
 
+/** Logos en `public/logo-tiendas/` — revisa extensiones (.png / .jpeg). */
 export const clients: Client[] = [
-  { name: 'Domos El Tabo', instagram: 'domoseltabo', logo: '/clients/domos.png' },
-  { name: 'Magic Resin', instagram: 'magicresin.cl', logo: '/clients/magic-resin.png' },
-  { name: 'Resin Epoxic', instagram: 'resinepoxicchile', logo: '/clients/resin-epoxic.png' },
-  { name: 'Doble A', instagram: 'dobleachile', logo: '/clients/doble-a.png' },
-  { name: 'Yolé', instagram: 'yole.cl', logo: '/clients/yole.png' },
-  { name: "Jolie's Santofagasta", instagram: 'joliesantofagasta', logo: '/clients/jolie.png' },
-  { name: 'Vivero Vila', instagram: 'vivero.vila', logo: '/clients/vivero-vila.png' },
+  { name: 'Domos El Tabo', instagram: 'domoseltabo', logo: '/logo-tiendas/domos.png' },
+  { name: 'Magic Resin', instagram: 'magicresin.cl', logo: '/logo-tiendas/magic.jpeg', logoFit: 'cover' },
+  { name: 'Resin Epoxic', instagram: 'resinepoxicchile', logo: '/logo-tiendas/resin-epoxic.png' },
+  { name: 'Yolé', instagram: 'yole.cl', logo: '/logo-tiendas/yole.png' },
+  { name: 'Yeet', instagram: 'yeet.cl', logo: '/logo-tiendas/yeet.png' },
+  { name: 'Onfayer', instagram: 'onfayer', logo: '/logo-tiendas/onfayer.png' },
 ]
 
 export const contact = {
