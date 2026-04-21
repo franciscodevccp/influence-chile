@@ -31,7 +31,7 @@ function Counter({ value, inView }: { value: string; inView: boolean }) {
   }, [inView, num, count, rounded])
 
   return (
-    <span className="num text-4xl sm:text-5xl bg-gradient-to-br from-white to-[var(--pink-light)] bg-clip-text text-transparent" style={{ fontWeight: 600 }}>
+    <span className="num text-4xl sm:text-5xl bg-gradient-to-br from-white to-[var(--teal-light)] bg-clip-text text-transparent" style={{ fontWeight: 600 }}>
       <span ref={ref}>0</span>
       {suffix}
     </span>

@@ -6,8 +6,15 @@
 #   - Output directory: out
 #   - Deja vacío el "Deploy command" o no uses `wrangler deploy` (eso es para Workers/OpenNext).
 #
-# Despliegue por CLI (opcional): wrangler pages deploy ./out --project-name=influence-chile
+# Despliegue por CLI (opcional):
+#   wrangler pages deploy ./out --project-name=influence-chile
+#
+# Si Cloudflare ejecuta `npx wrangler deploy` después del build, esta sección evita
+# el error "Missing entry-point": indica que el sitio son assets estáticos en ./out
 
 name = "influence-chile"
 compatibility_date = "2025-04-01"
 pages_build_output_dir = "out"
+
+[assets]
+directory = "./out"

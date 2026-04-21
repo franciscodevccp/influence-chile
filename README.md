@@ -12,9 +12,17 @@ En **Cloudflare** → tu proyecto → **Settings → Builds**:
 |--------|--------|
 | **Build command** | `pnpm install && pnpm run build` |
 | **Build output directory** | `out` |
-| **Deploy command** | *(vacío / ninguno)* |
+| **Deploy command** | *(vacío / ninguno)* — **Cloudflare Pages ya publica la carpeta `out` después del build.** |
 
-Si antes configuraste **`npx wrangler deploy`**, quítalo: dispara la plantilla Next+OpenNext y falla con `pages-manifest.json` porque aquí no hay modo `standalone`.
+**No uses `npx wrangler deploy`** en este proyecto: es para **Workers** (necesita script JS o carpeta de assets mal configurada) y en Pages muestra avisos como *“use `wrangler pages deploy` instead”* y errores tipo *“Missing entry-point to Worker script”*.
+
+Si tu panel obliga a un comando de deploy, sustitúyelo por:
+
+```text
+npx wrangler pages deploy ./out --project-name=influence-chile
+```
+
+(no `wrangler deploy`). El `wrangler.toml` del repo incluye `[assets] directory = "./out"` por si el entorno sigue ejecutando `wrangler deploy` tras el build.
 
 Para desplegar por CLI con la carpeta estática:
 
