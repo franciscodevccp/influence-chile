@@ -83,7 +83,7 @@ export const clients: Client[] = [
 ]
 
 export const contact = {
-  whatsapp: '56999070115',
+  whatsapp: '56965450723',
   instagram: 'influence.chile',
   email: 'contacto@influencechile.com',
 }
