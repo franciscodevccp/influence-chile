@@ -15,8 +15,8 @@ const steps = [
   },
   {
     n: '03',
-    title: 'Accesos seguros',
-    desc: 'Nos das acceso a tus redes vía Meta Business Suite —nunca contraseñas— y un medio de pago para la pauta.',
+    title: 'Accesos',
+    desc: 'Nos das acceso a tus cuentas y un medio de pago para la pauta. Desde ahí nos encargamos de todo, sin que tengas que complicarte con configuraciones.',
   },
   {
     n: '04',
