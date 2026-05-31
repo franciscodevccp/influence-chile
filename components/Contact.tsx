@@ -48,21 +48,21 @@ const items = [
     sub: `+${contact.whatsapp}`,
     href: whatsappUrl(),
     icon: WhatsApp,
-    color: 'bg-[#25D366]',
+    color: 'bg-[var(--teal)]',
   },
   {
     label: 'Instagram',
     sub: `@${contact.instagram}`,
     href: `https://instagram.com/${contact.instagram}`,
     icon: Instagram,
-    color: 'bg-gradient-to-br from-[#833AB4] via-[#E1306C] to-[#F77737]',
+    color: 'bg-[var(--pink)]',
   },
   {
     label: 'Email',
     sub: contact.email,
     href: `mailto:${contact.email}`,
     icon: Mail,
-    color: 'bg-[var(--pink)]',
+    color: 'bg-[var(--teal-deep)]',
   },
 ]
 

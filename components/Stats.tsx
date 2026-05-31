@@ -1,37 +1,39 @@
 'use client'
 
-import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
+import { motion, useInView, animate } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import { stats } from '@/lib/data'
 
 function parseTarget(value: string) {
-  const match = value.match(/([\d.]+)([A-Za-z+]*)/)
-  if (!match) return { num: 0, suffix: value }
-  return { num: parseFloat(match[1]), suffix: match[2] }
+  // Captura prefijo (+), número y sufijo (K, M, %, …) → "+2.4M" => {prefix:'+', num:2.4, suffix:'M'}
+  const match = value.match(/^([^\d.-]*)([\d.]+)(.*)$/)
+  if (!match) return { prefix: '', num: 0, suffix: value }
+  return { prefix: match[1], num: parseFloat(match[2]), suffix: match[3] }
 }
 
 function Counter({ value, inView }: { value: string; inView: boolean }) {
-  const { num, suffix } = parseTarget(value)
-  const count = useMotionValue(0)
-  const rounded = useTransform(count, (v) =>
-    num < 10 ? Math.round(v).toString() : v.toFixed(num % 1 === 0 ? 0 : 1),
-  )
+  const { prefix, num, suffix } = parseTarget(value)
   const ref = useRef<HTMLSpanElement>(null)
+  // Si el objetivo tiene decimales (p. ej. 3.9K) mostramos 1 decimal; si no, entero con separador de miles.
+  const isDecimal = !Number.isInteger(num)
 
   useEffect(() => {
     if (!inView) return
-    const controls = animate(count, num, { duration: 1.6, ease: 'easeOut' })
-    const unsub = rounded.on('change', (v) => {
-      if (ref.current) ref.current.textContent = v
+    const format = (v: number) =>
+      isDecimal ? v.toFixed(1) : Math.round(v).toLocaleString('es-CL')
+    const controls = animate(0, num, {
+      duration: 1.6,
+      ease: 'easeOut',
+      onUpdate: (v) => {
+        if (ref.current) ref.current.textContent = format(v)
+      },
     })
-    return () => {
-      controls.stop()
-      unsub()
-    }
-  }, [inView, num, count, rounded])
+    return () => controls.stop()
+  }, [inView, num, isDecimal])
 
   return (
     <span className="num text-4xl sm:text-5xl bg-gradient-to-br from-white to-[var(--teal-light)] bg-clip-text text-transparent" style={{ fontWeight: 600 }}>
+      {prefix}
       <span ref={ref}>0</span>
       {suffix}
     </span>

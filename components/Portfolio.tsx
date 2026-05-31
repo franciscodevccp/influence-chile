@@ -49,8 +49,8 @@ function ClientCard({
           />
         ) : (
           <span
-            className="font-display px-2 text-center text-xs leading-tight text-white/80 transition group-hover:text-white sm:text-sm"
-            style={{ fontWeight: 600, letterSpacing: '-0.02em' }}
+            className="font-display px-2 text-center leading-tight text-[var(--teal-light)] transition group-hover:brightness-110"
+            style={{ fontWeight: 700, letterSpacing: '-0.03em', fontSize: '1.35rem' }}
           >
             {name}
           </span>
@@ -80,7 +80,7 @@ export default function Portfolio() {
             Casos y cuentas
           </span>
           <h2 className="mt-4 font-display text-3xl sm:text-5xl" style={{ fontWeight: 600 }}>
-            Marcas que <span className="serif-accent text-[var(--pink-light)]">confían</span> en nosotros
+            Marcas que <span className="text-[var(--pink-light)]">confían</span> en nosotros
           </h2>
           <p className="mt-3 text-sm text-white/55 sm:text-base">
             Algunas redes donde hago community manager y contenido.

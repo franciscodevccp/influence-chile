@@ -1,8 +1,8 @@
 export const stats = [
-  { value: '3.9K', label: 'Comunidad Instagram' },
-  { value: '65', label: 'Publicaciones' },
-  { value: '9', label: 'Años en la industria' },
-  { value: '6', label: 'Marcas gestionadas' },
+  { value: '+2.4M', label: 'Alcance gestionado' },
+  { value: '+6', label: 'Marcas gestionadas' },
+  { value: '9', label: 'Años de experiencia' },
+  { value: '100%', label: 'Gestión personalizada' },
 ]
 
 export type Plan = {
@@ -13,16 +13,6 @@ export type Plan = {
 }
 
 export const plans: Plan[] = [
-  {
-    name: 'Contenido Estratégico',
-    price: 69990,
-    tag: 'Solo ideas',
-    features: [
-      '3 ideas de Reels con guion',
-      '12 ideas de Posts para el Feed',
-      '12 ideas de Historias',
-    ],
-  },
   {
     name: 'Plan Presencia',
     price: 290000,
@@ -77,9 +67,11 @@ export const clients: Client[] = [
   { name: 'Domos El Tabo', instagram: 'domoseltabo', logo: '/logo-tiendas/domos.png' },
   { name: 'Magic Resin', instagram: 'magicresin.cl', logo: '/logo-tiendas/magic.jpeg', logoFit: 'cover' },
   { name: 'Resin Epoxic', instagram: 'resinepoxicchile', logo: '/logo-tiendas/resin-epoxic.png' },
-  { name: 'Yolé', instagram: 'yole.cl', logo: '/logo-tiendas/yole.png' },
-  { name: 'Yeet', instagram: 'yeet.cl', logo: '/logo-tiendas/yeet.png' },
-  { name: 'Onfayer', instagram: 'onfayer', logo: '/logo-tiendas/onfayer.png' },
+  // TODO: faltan los archivos de logo de estas 3 marcas en public/logo-tiendas/.
+  // Mientras tanto se muestra el nombre como respaldo. Al agregar el .png, restaurar `logo`.
+  { name: 'Yolé', instagram: 'yole.cl' },
+  { name: 'Yeet', instagram: 'yeet.cl' },
+  { name: 'Onfayer', instagram: 'onfayer' },
 ]
 
 export const contact = {

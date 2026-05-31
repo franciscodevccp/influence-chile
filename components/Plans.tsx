@@ -22,14 +22,14 @@ export default function Plans() {
             Community manager
           </span>
           <h2 className="mt-4 font-display text-3xl sm:text-5xl" style={{ fontWeight: 600 }}>
-            Elige el <span className="serif-accent text-[var(--teal-light)]">ritmo</span> de tu marca
+            Elige el <span className="text-[var(--teal-light)]">ritmo</span> de tu marca
           </h2>
           <p className="mt-3 text-sm sm:text-base text-white/60">
             Planes de gestión de redes y contenido · Precios mensuales · Valores + IVA
           </p>
         </motion.div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan, i) => {
             const isRecommended = plan.tag === 'Recomendado'
             return (
