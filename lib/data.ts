@@ -66,10 +66,9 @@ export type Client = {
 export const clients: Client[] = [
   { name: 'Domos El Tabo', instagram: 'domoseltabo', logo: '/logo-tiendas/domos.png' },
   { name: 'Magic Resin', instagram: 'magicresin.cl', logo: '/logo-tiendas/magic.jpeg', logoFit: 'cover' },
-  { name: 'Resin Epoxic', instagram: 'resinepoxicchile', logo: '/logo-tiendas/resin-epoxic.png' },
-  // TODO: faltan los archivos de logo de estas 3 marcas en public/logo-tiendas/.
-  // Mientras tanto se muestra el nombre como respaldo. Al agregar el .png, restaurar `logo`.
-  { name: 'Yolé', instagram: 'yole.cl' },
+  { name: 'Resin Epoxic', instagram: 'resin.epoxic', logo: '/logo-tiendas/resin-epoxic.png' },
+  { name: 'Yolé', instagram: 'colchones.yole', logo: '/logo-tiendas/yole.png' },
+  // TODO: faltan los logos de Yeet y Onfayer en public/logo-tiendas/ (se muestra el nombre como respaldo).
   { name: 'Yeet', instagram: 'yeet.cl' },
   { name: 'Onfayer', instagram: 'onfayer' },
 ]
