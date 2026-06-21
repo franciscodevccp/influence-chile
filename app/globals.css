@@ -92,3 +92,26 @@ a {
   z-index: 1;
   mix-blend-mode: overlay;
 }
+
+/* Banda BONUS de influencers: gradiente teal->pink que se desliza suavemente. */
+@keyframes bonusShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.bonus-band {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--teal) 14%, var(--card)),
+    color-mix(in srgb, var(--pink) 14%, var(--card)),
+    color-mix(in srgb, var(--teal) 14%, var(--card))
+  );
+  background-size: 200% 100%;
+  animation: bonusShimmer 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bonus-band {
+    animation: none;
+  }
+}

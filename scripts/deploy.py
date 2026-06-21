@@ -71,8 +71,22 @@ for root_, dirs, files in os.walk(LOCAL_DIR):
 sftp.close()
 print(f"   {count} archivos subidos a {REMOTE_DIR}")
 
-print("== Configurando nginx ==")
-nginx_conf = """server {
+print("== Recargando nginx ==")
+# Si certbot ya configuró HTTPS, NO se reescribe el config (lo gestiona certbot):
+# solo se recarga nginx para servir los archivos nuevos. Así no se borra el bloque SSL.
+_c, ssl_out, _e = run(
+    client,
+    "test -f /etc/letsencrypt/live/chileinfluence.cl/fullchain.pem && echo SSL || echo NOSSL",
+)
+
+if "SSL" in ssl_out:
+    code, o, e = run(
+        client,
+        "sudo nginx -t && sudo systemctl reload nginx && echo 'NGINX_OK (config HTTPS conservada)'",
+    )
+    print((o + e).strip())
+else:
+    nginx_conf = """server {
     listen 80 default_server;
     listen [::]:80 default_server;
     server_name chileinfluence.cl www.chileinfluence.cl _;
@@ -91,15 +105,15 @@ nginx_conf = """server {
     error_page 404 /404.html;
 }
 """
-b64 = base64.b64encode(nginx_conf.encode()).decode()
-cmd = (
-    f"echo {b64} | base64 -d | sudo tee /etc/nginx/sites-available/influence-chile >/dev/null && "
-    "sudo ln -sf /etc/nginx/sites-available/influence-chile /etc/nginx/sites-enabled/influence-chile && "
-    "sudo rm -f /etc/nginx/sites-enabled/default && "
-    "sudo nginx -t && sudo systemctl reload nginx && echo NGINX_OK"
-)
-code, o, e = run(client, cmd)
-print((o + e).strip())
+    b64 = base64.b64encode(nginx_conf.encode()).decode()
+    cmd = (
+        f"echo {b64} | base64 -d | sudo tee /etc/nginx/sites-available/influence-chile >/dev/null && "
+        "sudo ln -sf /etc/nginx/sites-available/influence-chile /etc/nginx/sites-enabled/influence-chile && "
+        "sudo rm -f /etc/nginx/sites-enabled/default && "
+        "sudo nginx -t && sudo systemctl reload nginx && echo NGINX_OK"
+    )
+    code, o, e = run(client, cmd)
+    print((o + e).strip())
 
 client.close()
 print("== DEPLOY TERMINADO ==" if code == 0 else "== DEPLOY CON ERRORES (revisa arriba) ==")

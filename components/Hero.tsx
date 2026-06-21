@@ -40,12 +40,12 @@ export default function Hero() {
         className="mt-8 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row"
       >
         <motion.a
-          href="#planes"
+          href="#rubros"
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--teal)] px-6 py-3.5 font-medium text-white shadow-glow transition hover:bg-[var(--teal-light)] hover:text-[var(--dark)] sm:w-auto"
         >
-          Cotiza tu plan
+          Encuentra tu rubro
           <ArrowRight size={18} />
         </motion.a>
         <motion.a

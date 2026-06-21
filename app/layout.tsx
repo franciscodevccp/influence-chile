@@ -21,20 +21,106 @@ const serif = Instrument_Serif({
   variable: '--font-serif',
 })
 
+const SITE_URL = 'https://www.chileinfluence.cl'
+
 export const metadata: Metadata = {
-  title: 'Influence Chile · Community manager en redes sociales',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Influence Chile · Community manager y marketing en redes',
+    template: '%s · Influence Chile',
+  },
   description:
-    'Community manager en Chile. Gestión de Instagram y redes: contenido, calendario, interacción con tu comunidad e informes claros para tu marca.',
+    'Agencia de community manager y marketing en redes en Chile. Estrategia por rubro, contenido para Instagram y TikTok, gestión de comunidad e informes claros. +2.4M de alcance gestionado.',
+  keywords: [
+    'community manager Chile',
+    'agencia de marketing digital Chile',
+    'gestión de redes sociales',
+    'community manager Santiago',
+    'manejo de redes sociales Chile',
+    'marketing en Instagram',
+    'marketing en TikTok',
+    'agencia de redes sociales',
+    'community manager para restaurantes',
+    'marketing inmobiliario Chile',
+    'marketing para clínicas estéticas',
+    'marketing para turismo',
+  ],
+  authors: [{ name: 'Influence Chile' }],
+  creator: 'Influence Chile',
+  publisher: 'Influence Chile',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    locale: 'es_CL',
+    url: SITE_URL,
+    siteName: 'Influence Chile',
+    title: 'Influence Chile · Convertimos tus redes en clientes',
+    description:
+      'Community manager y marketing en redes en Chile. Estrategia por rubro para Instagram y TikTok, con informes claros. +2.4M de alcance gestionado.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Influence Chile — community manager y marketing en redes',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Influence Chile · Convertimos tus redes en clientes',
+    description:
+      'Community manager y marketing en redes en Chile. Estrategia por rubro para Instagram y TikTok. +2.4M de alcance gestionado.',
+    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   icons: {
     icon: '/logo/logo.PNG',
     apple: '/logo/logo.PNG',
   },
+  category: 'marketing',
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${SITE_URL}/#business`,
+  name: 'Influence Chile',
+  description:
+    'Agencia de community manager y marketing en redes sociales en Chile. Gestión de Instagram y TikTok, contenido, estrategia por rubro e informes mensuales.',
+  url: SITE_URL,
+  image: `${SITE_URL}/og-image.png`,
+  logo: `${SITE_URL}/logo/logo.PNG`,
+  telephone: '+56965450723',
+  email: 'contacto@influencechile.com',
+  priceRange: '$$',
+  areaServed: { '@type': 'Country', name: 'Chile' },
+  knowsLanguage: ['es'],
+  sameAs: ['https://www.instagram.com/influence.chile'],
+  founder: { '@type': 'Person', name: 'Sofía Cisternas' },
+  slogan: 'Convertimos tus redes en clientes',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${display.variable} ${body.variable} ${serif.variable}`}>
-      <body className="grain">{children}</body>
+      <body className="grain">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   )
 }

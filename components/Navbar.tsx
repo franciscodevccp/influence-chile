@@ -6,9 +6,11 @@ import { Menu, X } from 'lucide-react'
 import Logo from '@/components/Logo'
 
 const links = [
-  { href: '#planes', label: 'Planes' },
-  { href: '#proceso', label: 'Proceso' },
-  { href: '#clientes', label: 'Clientes' },
+  { href: '/#rubros', label: 'Rubros' },
+  { href: '/#planes', label: 'Planes' },
+  { href: '/#proceso', label: 'Proceso' },
+  { href: '/#clientes', label: 'Clientes' },
+  { href: '/#faq', label: 'Preguntas' },
 ]
 
 export default function Navbar() {
@@ -23,7 +25,7 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-6xl px-5 py-3 flex items-center justify-between">
         <a
-          href="#top"
+          href="/"
           className="flex items-center gap-3"
           aria-label="Influence Chile — inicio"
           onClick={() => setOpen(false)}
@@ -42,7 +44,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#contacto"
+            href="/#contacto"
             className="px-3 py-1.5 rounded-full bg-[var(--pink)] text-white hover:bg-[var(--pink-light)] transition"
           >
             Contacto
@@ -83,7 +85,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#contacto"
+                href="/#contacto"
                 onClick={() => setOpen(false)}
                 className="mt-1 rounded-full bg-[var(--pink)] px-4 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-[var(--pink-light)]"
               >

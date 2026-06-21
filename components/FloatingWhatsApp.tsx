@@ -5,10 +5,10 @@ import { whatsappUrl } from '@/lib/data'
 
 /** Botón flotante de WhatsApp, siempre visible. Color de marca (turquesa) para mantener
  *  la paleta; si prefieres el verde clásico de WhatsApp, cambiar bg/​shadow por #25D366. */
-export default function FloatingWhatsApp() {
+export default function FloatingWhatsApp({ href }: { href?: string }) {
   return (
     <motion.a
-      href={whatsappUrl()}
+      href={href ?? whatsappUrl()}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escríbenos por WhatsApp"
