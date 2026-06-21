@@ -199,7 +199,7 @@ export const sectorFaq: SectorFaq[] = [
   },
   {
     q: '¿Qué necesito entregar para empezar?',
-    a: 'Acceso a tus redes vía Meta Business Suite (sin entregar contraseñas) y una carpeta con fotos y videos de tu marca. Del resto nos encargamos nosotros.',
+    a: 'El acceso a tus cuentas (usuario y contraseña) y una carpeta con fotos y videos de tu marca. Del resto nos encargamos nosotros.',
   },
   {
     q: '¿La pauta publicitaria está incluida?',
