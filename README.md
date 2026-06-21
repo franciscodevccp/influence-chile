@@ -1,34 +1,48 @@
 # influence-chile
 
-Sitio web de Influence Chile — community manager (Next.js).
+Sitio web de **Influence Chile** — community manager / agencia de marketing
+(Next.js + React + TypeScript + Tailwind + framer-motion).
 
-## Cloudflare Pages
+- **En vivo:** https://chileinfluence.cl
+- **Hosting:** VPS propio (Ubuntu + nginx). El sitio se genera como **HTML estático**
+  con `next build` (`output: 'export'`), por lo que no necesita Node en el servidor.
 
-Este repositorio usa **`output: 'export'`**: el resultado del build es la carpeta **`out/`** (HTML estático). **No** coincide con Workers + OpenNext (`wrangler deploy`), que esperan otro tipo de build.
-
-En **Cloudflare** → tu proyecto → **Settings → Builds**:
-
-| Campo | Valor |
-|--------|--------|
-| **Build command** | `pnpm install && pnpm run build` |
-| **Build output directory** | `out` |
-| **Deploy command** | *(vacío / ninguno)* — **Cloudflare Pages ya publica la carpeta `out` después del build.** |
-
-**No uses `npx wrangler deploy`** en este proyecto: es para **Workers** (necesita script JS o carpeta de assets mal configurada) y en Pages muestra avisos como *“use `wrangler pages deploy` instead”* y errores tipo *“Missing entry-point to Worker script”*.
-
-Si tu panel obliga a un comando de deploy, sustitúyelo por:
-
-```text
-npx wrangler pages deploy ./out --project-name=influence-chile
-```
-
-(no `wrangler deploy`). El `wrangler.toml` del repo incluye `[assets] directory = "./out"` por si el entorno sigue ejecutando `wrangler deploy` tras el build.
-
-Para desplegar por CLI con la carpeta estática:
+## Desarrollo local
 
 ```bash
-pnpm run build
-pnpm exec wrangler pages deploy ./out --project-name=influence-chile
+pnpm install
+pnpm dev          # http://localhost:3000
 ```
 
-(Requiere `wrangler` en el proyecto o `npx wrangler`, y autenticación con Cloudflare.)
+Los datos del sitio (planes, stats, clientes, contacto) están centralizados en
+[`lib/data.ts`](lib/data.ts) — edítalos ahí, no en los componentes.
+
+## Build
+
+```bash
+pnpm build
+```
+
+Genera el sitio estático en la carpeta `out/`.
+
+## Deploy al servidor
+
+El sitio se sirve desde un VPS con nginx. Para publicar cambios:
+
+```bash
+pnpm build
+SRV_PASS='<contraseña-del-servidor>' python scripts/deploy.py
+```
+
+`scripts/deploy.py` sube la carpeta `out/` por SFTP a `/var/www/influence-chile`
+y recarga nginx. La contraseña se pasa por la variable de entorno `SRV_PASS`
+(no se guarda en el repo).
+
+Detalles de la infraestructura:
+
+- **HTTPS:** Let's Encrypt (certbot), con renovación automática.
+- **DNS:** `chileinfluence.cl` y `www` apuntan a la IP del VPS (gestionado en
+  Cloudflare en modo *DNS only* — Cloudflare ya no sirve ni cachea el sitio).
+- **Scripts auxiliares** (en `scripts/`): `srv.py` (ejecutar comandos por SSH),
+  `deploy.py` (build + subida), `reboot_verify.py` (reiniciar y verificar).
+  Todos usan `paramiko` y reciben la contraseña por `SRV_PASS`.

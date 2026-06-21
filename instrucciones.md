@@ -41,7 +41,7 @@ pnpm add framer-motion lucide-react
 
 ---
 
-## 4. Configurar exportación estática para Cloudflare Pages
+## 4. Configurar exportación estática
 
 Edita `next.config.js` para exportar el proyecto como sitio estático:
 
@@ -276,7 +276,7 @@ const isInView = useInView(ref, { once: true })
 
 ---
 
-## 11. Build y deploy en Cloudflare Pages
+## 11. Build y deploy en el VPS (nginx)
 
 ### Build local
 
@@ -286,30 +286,17 @@ pnpm run build
 
 Esto genera la carpeta `/out` con el sitio estático listo para subir.
 
-### Deploy desde GitHub (recomendado)
+### Deploy al servidor
 
-1. Sube el proyecto a un repositorio en GitHub
-2. Entra a [pages.cloudflare.com](https://pages.cloudflare.com)
-3. Clic en "Create a project" → "Connect to Git"
-4. Selecciona el repositorio `influence-landing`
-5. Configura el build así:
-
-```
-Framework preset:   Next.js (Static HTML Export)
-Build command:      pnpm run build
-Build output dir:   out
-```
-
-6. Clic en "Save and Deploy"
-
-Cloudflare Pages hace deploy automático en cada push a la rama principal.
-
-### Deploy manual con Wrangler
+El sitio se sirve desde un VPS propio con nginx. Para publicar cambios:
 
 ```bash
 pnpm run build
-pnpm dlx wrangler pages deploy out --project-name=influence-landing
+SRV_PASS='<contraseña-del-servidor>' python scripts/deploy.py
 ```
+
+`scripts/deploy.py` sube la carpeta `out/` por SFTP a `/var/www/influence-chile`
+y recarga nginx. El HTTPS (Let's Encrypt) se renueva automáticamente.
 
 ---
 
@@ -334,4 +321,3 @@ pnpm dlx wrangler pages deploy out --project-name=influence-landing
 - Todos los botones de contacto deben abrir en nueva pestaña con `target="_blank" rel="noopener noreferrer"`.
 - El botón de WhatsApp puede incluir un mensaje predefinido en la URL:
   `https://wa.me/56999070115?text=Hola%20Sofia%2C%20me%20interesa%20cotizar%20un%20plan`
-- Cloudflare Pages no tiene restricciones comerciales, a diferencia de Vercel que limita el uso en proyectos de clientes bajo su plan gratuito.
