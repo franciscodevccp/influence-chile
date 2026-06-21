@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Space_Grotesk, Inter_Tight, Instrument_Serif } from 'next/font/google'
 import './globals.css'
+import MotionProvider from '@/components/MotionProvider'
 
 const display = Space_Grotesk({
   subsets: ['latin'],
@@ -85,7 +86,7 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/logo/logo.PNG',
+    icon: [{ url: '/favicon.ico' }, { url: '/logo/logo.PNG', type: 'image/png' }],
     apple: '/logo/logo.PNG',
   },
   category: 'marketing',
@@ -115,11 +116,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${display.variable} ${body.variable} ${serif.variable}`}>
       <body className="grain">
+        <a
+          href="#main"
+          className="fixed left-4 top-4 z-[999] -translate-y-24 rounded-lg bg-[var(--teal)] px-4 py-2 text-sm font-semibold text-white transition-transform focus-visible:translate-y-0"
+        >
+          Ir al contenido
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   )

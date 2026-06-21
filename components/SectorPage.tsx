@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import {
@@ -107,7 +107,7 @@ function SectorHero({ sector }: { sector: Sector }) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-6 text-xs text-white/40"
+          className="mb-6 text-xs text-white/50"
         >
           <Link href="/" className="transition hover:text-white/70">
             Influence
@@ -200,7 +200,7 @@ function SectorPainGain({ sector }: { sector: Sector }) {
           transition={{ duration: 0.5 }}
           className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 sm:p-7"
         >
-          <p className="mb-4 text-xs uppercase tracking-widest text-white/40">Sin estrategia</p>
+          <p className="mb-4 text-xs uppercase tracking-widest text-white/50">Sin estrategia</p>
           <ul className="space-y-3">
             {sector.objections.map((o) => (
               <li key={o} className="flex gap-3 text-sm text-white/55">
@@ -375,7 +375,7 @@ function PlanCard({ tier, sectorName, i, inView }: { tier: (typeof tiers)[number
 
       <div className="mt-5 mb-5 border-b border-white/5 pb-5">
         <div className="flex items-baseline gap-1">
-          <span className="text-sm text-white/40">$</span>
+          <span className="text-sm text-white/50">$</span>
           <span className="num text-4xl" style={{ fontWeight: 500 }}>
             {tier.price.toLocaleString('es-CL')}
           </span>
@@ -398,7 +398,7 @@ function PlanCard({ tier, sectorName, i, inView }: { tier: (typeof tiers)[number
           </p>
         </div>
       ) : (
-        <div className="mb-4 flex items-center gap-2 px-1 text-xs text-white/35">
+        <div className="mb-4 flex items-center gap-2 px-1 text-xs text-white/50">
           <Lock size={13} className="shrink-0" />
           Campañas con influencers: desde Plan Crecimiento
         </div>
@@ -518,11 +518,13 @@ function BonusInfluencers({ sector }: { sector: Sector }) {
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
+  const panelId = useId()
   return (
     <div className="border-b border-white/10">
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
+        aria-controls={panelId}
         className="flex w-full items-center justify-between gap-4 py-5 text-left"
       >
         <span className="font-display text-base text-white/90" style={{ fontWeight: 500 }}>
@@ -530,11 +532,13 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         </span>
         <ChevronDown
           size={18}
-          className={`shrink-0 text-white/40 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+          className={`shrink-0 text-white/50 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
           style={open ? { color: 'var(--accent)' } : undefined}
         />
       </button>
       <div
+        id={panelId}
+        role="region"
         className="grid transition-all duration-300"
         style={{ gridTemplateRows: open ? '1fr' : '0fr' }}
       >
@@ -631,7 +635,7 @@ function SectorCrossNav({ current }: { current: string }) {
   return (
     <section className="px-5 pb-20">
       <div className="mx-auto max-w-5xl">
-        <p className="mb-5 text-center text-xs uppercase tracking-widest text-white/40">Otros rubros</p>
+        <p className="mb-5 text-center text-xs uppercase tracking-widest text-white/50">Otros rubros</p>
         <div className="flex flex-wrap justify-center gap-3">
           {others.map((s) => (
             <Link
@@ -656,11 +660,30 @@ function SectorCrossNav({ current }: { current: string }) {
 /* ---------- page ---------- */
 
 export default function SectorPage({ sector }: { sector: Sector }) {
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://www.chileinfluence.cl' },
+      { '@type': 'ListItem', position: 2, name: 'Rubros', item: 'https://www.chileinfluence.cl/#rubros' },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: sector.name,
+        item: `https://www.chileinfluence.cl/planes/${sector.slug}`,
+      },
+    ],
+  }
   return (
     <div
+      id="main"
       className="relative overflow-hidden"
       style={{ '--accent': sector.accentHex, '--accent-soft': sector.accentSoftHex } as CSSProperties}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <Navbar />
       <SectorHero sector={sector} />
       <SectorPainGain sector={sector} />

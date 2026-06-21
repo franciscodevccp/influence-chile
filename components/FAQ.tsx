@@ -48,6 +48,7 @@ export default function FAQ() {
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
+                  aria-controls={`faq-a-${i}`}
                   className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition hover:bg-white/[0.03]"
                 >
                   <span
@@ -72,6 +73,8 @@ export default function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: 'easeOut' }}
                       className="overflow-hidden"
+                      id={`faq-a-${i}`}
+                      role="region"
                     >
                       <p className="px-5 pb-5 text-sm leading-relaxed text-white/65 sm:text-base">
                         {item.a}

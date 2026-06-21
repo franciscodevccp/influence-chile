@@ -114,4 +114,19 @@ a {
   .bonus-band {
     animation: none;
   }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Foco visible para navegación por teclado (accesibilidad WCAG). */
+:where(a, button, [role='button'], [tabindex]):focus-visible {
+  outline: 2px solid var(--teal-light);
+  outline-offset: 2px;
+  border-radius: 6px;
 }

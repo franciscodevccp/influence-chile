@@ -65,7 +65,7 @@ export default function Plans() {
 
                 <div className="mt-5 mb-6 border-b border-white/5 pb-5">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-sm text-white/40" style={{ fontWeight: 400 }}>
+                    <span className="text-sm text-white/50" style={{ fontWeight: 400 }}>
                       $
                     </span>
                     <span className="num text-4xl" style={{ fontWeight: 500 }}>

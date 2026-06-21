@@ -27,7 +27,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <main className="relative overflow-hidden">
+      <main id="main" className="relative overflow-hidden">
         <Navbar />
         <Hero />
         <Stats />
@@ -40,7 +40,7 @@ export default function Home() {
         <footer className="py-10 text-center text-xs">
           <p className="leading-relaxed">
             <span className="text-[var(--teal-light)]">© {new Date().getFullYear()} Influence Chile</span>
-            <span className="text-white/35"> · </span>
+            <span className="text-white/50"> · </span>
             <span className="text-[var(--muted)]">Community manager</span>
           </p>
         </footer>

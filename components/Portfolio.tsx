@@ -39,7 +39,11 @@ function ClientCard({
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={logo}
-            alt={name}
+            alt={`Logo de ${name}`}
+            loading="lazy"
+            decoding="async"
+            width={136}
+            height={136}
             className={
               isCover
                 ? 'h-full w-full rounded-full object-cover object-center opacity-90 transition group-hover:opacity-100'

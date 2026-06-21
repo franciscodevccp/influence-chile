@@ -95,7 +95,7 @@ export default function SectorIndex() {
           ))}
         </div>
 
-        <p className="mt-10 text-center text-xs text-white/40">
+        <p className="mt-10 text-center text-xs text-white/50">
           5 rubros · una estrategia distinta para cada uno
         </p>
       </div>
